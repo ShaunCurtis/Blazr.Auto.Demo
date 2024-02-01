@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Blazr.UI;
+namespace Blazr.UI.Common;
 public interface IRenderModeProvider
 {
     public ComponentRenderMode RenderMode { get; }

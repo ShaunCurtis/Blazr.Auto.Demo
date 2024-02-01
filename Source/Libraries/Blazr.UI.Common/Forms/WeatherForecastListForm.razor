@@ -1,11 +1,10 @@
-﻿@page "/"
-<PageTitle>Home</PageTitle>
+﻿@namespace Blazr.UI.Common
 @inject IWeatherForecastProvider DataBroker
-@inject IRenderModeProvider RenderModeProvider
-@rendermode InteractiveServer
+<PageTitle>Weather Forecast List Form</PageTitle>
 
 <h1>Weather</h1>
-<div class="alert alert-primary">Render Mode: @this.RenderModeProvider.RenderMode</div>
+
+<RenderModeAlert/>
 <p>This component demonstrates showing data.</p>
 
 @if (forecasts == null)
@@ -42,7 +41,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        // Simulate asynchronous loading to demonstrate a loading indicator
         var result = await this.DataBroker.GetWeatherForecastsAsync(ListRequest.Default());
         forecasts = result.Items;
     }

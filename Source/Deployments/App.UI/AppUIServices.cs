@@ -1,6 +1,6 @@
-﻿using Blazr.Infrastructure;
-using Blazr.UI;
+﻿using Blazr.UI.Common;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace Blazr.Infrastructure;
 
 public static class AppUIServices
