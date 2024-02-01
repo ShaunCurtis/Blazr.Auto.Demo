@@ -14,7 +14,7 @@ public class APIWeatherForecastProvider : IWeatherForecastProvider
 
     public async Task<ListResult<WeatherForecast>> GetWeatherForecastsAsync(ListRequest request, CancellationToken? cancellationToken = null)
     {
-        var httpClient = _httpClientFactory.CreateClient("ServerAPI");
+        using var httpClient = _httpClientFactory.CreateClient("ServerAPI");
 
         var httpResult = await httpClient.PostAsJsonAsync<ListRequest>("/API/Weather/GetWeatherForecasts", request, cancellationToken ?? new());
 

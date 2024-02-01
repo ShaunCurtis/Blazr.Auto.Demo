@@ -22,6 +22,8 @@ The page now looks like this:
 
 This separates out the implementation from the layout of the site.  A form can be reused in different pages or Deployments.
 
-In th solution the same form is used in various deployments.
+In the solution the same form is used in various deployments.
+
+> In Progress
 
 
