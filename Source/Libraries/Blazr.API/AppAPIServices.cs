@@ -1,4 +1,5 @@
-﻿using Blazr.OneWayStreet.Core;
+﻿using Blazr.App.Core;
+using Blazr.OneWayStreet.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blazr.Configuration;
@@ -7,15 +8,10 @@ public static class InfrastructureServices
 {
     public static void AddAppEndPoints(this WebApplication app)
     {
-        app.MapPost("/API/Weather/GetWeatherForecasts", async ([FromBody] ListRequest listRequest, IWeatherForecastProvider provider) =>
+        app.MapPost("/API/WeatherForecast/ListQuery", async ([FromBody] APIListQueryRequest listRequest, IListRequestHandler provider) =>
         {
-            var result = await provider.GetWeatherForecastsAsync(listRequest);
-            return result;
-        });
-
-        app.MapPost("/API/WeatherForecast/ListQuery", async ([FromBody] ListQueryRequest listRequest, IListRequestHandler<WeatherForecast> provider) =>
-        {
-            var result = await provider.ExecuteAsync(listRequest);
+            var request = new ListQueryRequest() { StartIndex = listRequest.StartIndex, PageSize = listRequest.PageSize, Filters = listRequest.Filters, Sorters = listRequest.Sorters };
+            var result = await provider.ExecuteAsync<WeatherForecast>(request);
             return result;
         });
     }

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazr.RenderState" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
   </ItemGroup>
 
@@ -20,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Blazr.Core\Blazr.Core.csproj" />
     <ProjectReference Include="..\..\Libraries\Blazr.UI.Common\Blazr.UI.Common.csproj" />
   </ItemGroup>
 

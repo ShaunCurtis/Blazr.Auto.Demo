@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -9,12 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+    <PackageReference Include="Blazr.RenderState.WASM" Version="1.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Blazr.Core\Blazr.Core.csproj" />
-    <ProjectReference Include="..\..\Libraries\Blazr.Infrastructure\Blazr.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Libraries\Blazr.App.Infrastructure\Blazr.App.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Libraries\Blazr.OneWayStreet\Blazr.OneWayStreet.csproj" />
     <ProjectReference Include="..\..\Libraries\Blazr.UI.Common\Blazr.UI.Common.csproj" />
     <ProjectReference Include="..\App.UI\App.UI.csproj" />
   </ItemGroup>

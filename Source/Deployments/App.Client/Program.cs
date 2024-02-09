@@ -1,9 +1,10 @@
-using Blazr.Infrastructure;
+using Blazr.RenderState.WASM;
+using Blazr.App.Infrastructure;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-builder.Services.AddAppWebAssemblyInfrastructureServices(builder.HostEnvironment.BaseAddress);
-builder.Services.AddAppWebAssemblyUIServices();
+builder.Services.AddAppClientInfrastructureServices(builder.HostEnvironment.BaseAddress);
+builder.AddBlazrRenderStateWASMServices();
 
 await builder.Build().RunAsync();

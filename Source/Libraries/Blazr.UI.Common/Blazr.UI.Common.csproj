@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,8 +12,9 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Blazr.RenderState" Version="1.0.0" />
 	</ItemGroup>
 
   <ItemGroup>
@@ -23,11 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Blazr.Core\Blazr.Core.csproj" />
+    <ProjectReference Include="..\Blazr.App.Core\Blazr.App.Core.csproj" />
+    <ProjectReference Include="..\Blazr.OneWayStreet\Blazr.OneWayStreet.csproj" />
   </ItemGroup>
 
 </Project>

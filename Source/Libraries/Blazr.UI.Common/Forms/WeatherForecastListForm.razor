@@ -1,10 +1,9 @@
 ﻿@namespace Blazr.UI.Common
-@inject IWeatherForecastProvider DataBroker
+@inject IListRequestHandler DataBroker
 <PageTitle>Weather Forecast List Form</PageTitle>
 
 <h1>Weather</h1>
 
-<RenderModeAlert/>
 <p>This component demonstrates showing data.</p>
 
 @if (forecasts == null)
@@ -41,7 +40,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await this.DataBroker.GetWeatherForecastsAsync(ListRequest.Default());
+        var result = await this.DataBroker.ExecuteAsync<WeatherForecast>(new ListQueryRequest());
         forecasts = result.Items;
     }
 }

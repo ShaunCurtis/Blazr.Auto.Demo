@@ -1,5 +1,8 @@
 using Blazr.Configuration;
-using Blazr.Infrastructure;
+using Blazr.App.Infrastructure.Server;
+using App.UI;
+using Microsoft.EntityFrameworkCore;
+using Blazr.RenderState.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +13,14 @@ builder.Services.AddRazorComponents()
 
 // Adds the application Services
 builder.Services.AddAppServerInfrastructureServices();
-builder.Services.AddAppServerUIServices();
-builder.Services.AddHttpContextAccessor();
+builder.AddBlazrRenderStateServerServices();
 
 var app = builder.Build();
+
+// get the DbContext factory and add the test data
+var factory = app.Services.GetService<IDbContextFactory<InMemoryTestDbContext>>();
+if (factory is not null)
+    TestDataProvider.Instance().LoadDbContext<InMemoryTestDbContext>(factory);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
