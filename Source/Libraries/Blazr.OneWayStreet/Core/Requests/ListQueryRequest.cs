@@ -10,6 +10,6 @@ public sealed record ListQueryRequest
     public int StartIndex { get; init; } = 0;
     public int PageSize { get; init; } = 1000;
     public CancellationToken Cancellation { get; set; } = new();
-    public List<FilterDefinition> Filters { get; init; } = new  ();
+    public List<FilterDefinition> Filters { get; init; } = new();
     public List<SortDefinition> Sorters { get; init; } = new();
 }
