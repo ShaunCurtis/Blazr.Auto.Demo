@@ -37,9 +37,9 @@ public sealed class ListRequestClientHandler
     {
         using var httpClient = _httpClientFactory.CreateClient("ServerAPI");
 
-        var APIRequest = new APIListQueryRequest() { StartIndex = request.StartIndex, PageSize = request.PageSize, Sorters = request.Sorters, Filters = request.Filters };
+        var apiRequest = APIListQueryRequest.Create(request);
         var recName = typeof(TRecord).Name;
-        var httpResult = await httpClient.PostAsJsonAsync<APIListQueryRequest>($"/API/{recName}/ListQuery", APIRequest, request.Cancellation);
+        var httpResult = await httpClient.PostAsJsonAsync<APIListQueryRequest>($"/API/{recName}/ListQuery", apiRequest, request.Cancellation);
 
         if (httpResult.IsSuccessStatusCode)
         {

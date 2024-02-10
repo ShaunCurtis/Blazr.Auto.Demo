@@ -5,6 +5,12 @@
 /// ============================================================
 namespace Blazr.OneWayStreet.Core;
 
+/// <summary>
+/// This object is used to return the list results from a ListQuery
+/// It's designed to work with paging.  It provides the page and a total count
+/// It also provides status information and in the case of failure a message 
+/// </summary>
+/// <typeparam name="TRecord">The record type of Items</typeparam>
 public sealed record ListQueryResult<TRecord> : IDataResult
 {
     public IEnumerable<TRecord> Items { get; init;} = Enumerable.Empty<TRecord>();  
