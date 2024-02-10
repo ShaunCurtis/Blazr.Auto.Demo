@@ -33,7 +33,7 @@ public sealed class ListRequestClientHandler
     }
 
     private async ValueTask<ListQueryResult<TRecord>> GetItemsAsync<TRecord>(ListQueryRequest request)
-    where TRecord : class
+        where TRecord : class
     {
         using var httpClient = _httpClientFactory.CreateClient("ServerAPI");
 

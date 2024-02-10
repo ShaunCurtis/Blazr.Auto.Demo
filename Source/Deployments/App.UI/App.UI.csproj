@@ -20,8 +20,4 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Blazr.UI.Common\Blazr.UI.Common.csproj" />
-  </ItemGroup>
-
 </Project>
