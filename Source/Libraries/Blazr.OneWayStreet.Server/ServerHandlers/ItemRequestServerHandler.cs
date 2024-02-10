@@ -29,7 +29,7 @@ public sealed class ItemRequestServerHandler<TDbContext>
             return await _customHandler.ExecuteAsync(request);
 
         // If not run the base handler
-        return await this.GetItemAsync<TRecord>(request);
+        return await this.GetItemAsync<TRecord>(request);   
     }
 
     private async ValueTask<ItemQueryResult<TRecord>> GetItemAsync<TRecord>(ItemQueryRequest request)
@@ -43,7 +43,7 @@ public sealed class ItemRequestServerHandler<TDbContext>
        // var record = await dbContext.Set<TRecord>().SingleOrDefaultAsync(item => item.EntityUid == request.Uid, request.Cancellation);
 
         if (record is null)
-            return ItemQueryResult<TRecord>.Failure($"No record retrieved with a Uid of {request.KeyValue.ToString()}");
+            return ItemQueryResult<TRecord>.Failure($"No record retrieved with a Uid of {request.KeyValue?.ToString() ?? "Not Set"}");
 
         return ItemQueryResult<TRecord>.Success(record);
     }

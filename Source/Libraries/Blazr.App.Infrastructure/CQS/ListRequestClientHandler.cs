@@ -21,14 +21,14 @@ public sealed class ListRequestClientHandler
     public async ValueTask<ListQueryResult<TRecord>> ExecuteAsync<TRecord>(ListQueryRequest request)
         where TRecord : class
     {
-        // Try and get a registered custom handler
+        // First we check if there is a registered custom handler for TRecord
         var _customHandler = _serviceProvider.GetService<IListRequestHandler<TRecord>>();
 
-        // If we one is registered in DI and execute it
+        // If we get one we use it
         if (_customHandler is not null)
             return await _customHandler.ExecuteAsync(request);
 
-        // If not run the base handler
+        // If not we run the base handler
         return await this.GetItemsAsync<TRecord>(request);
     }
 

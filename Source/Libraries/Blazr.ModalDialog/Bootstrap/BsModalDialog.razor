@@ -1,0 +1,31 @@
+﻿@*
+    /// ============================================================
+    /// Author: Shaun Curtis, Cold Elm Coders
+    /// License: Use And Donate
+    /// If you use it, donate something to a charity somewhere
+    /// ============================================================
+*@
+
+@namespace Blazr.ModalDialog.BootStrap
+@inherits ModalDialogBase
+
+@if (this.Context.Display)
+{
+    <CascadingValue Value="(IModalDialogContext)this.Context">
+        <div class="modal show-modal" tabindex="-1">
+            <div class="modal-dialog @this.Size">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <DynamicComponent Type=this.Context.ModalContentType Parameters=this.Context.Options?.ControlParameters />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </CascadingValue>
+}
+
+@code {
+    private BsModalOptions modalOptions => this.Context.Options as BsModalOptions ?? new();
+        
+    protected string Size => modalOptions.ModalSize;
+}

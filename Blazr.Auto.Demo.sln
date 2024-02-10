@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.UI", "Source\Deployment
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.App.Core", "Source\Libraries\Blazr.App.Core\Blazr.App.Core.csproj", "{A2924EA2-A9CE-4AB5-9553-10FE1A158A0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazr.OneWayStreet.Server", "Source\Libraries\Blazr.OneWayStreet.Server\Blazr.OneWayStreet.Server.csproj", "{3BA5C79F-8A80-476B-BD23-6462B8641AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.OneWayStreet.Server", "Source\Libraries\Blazr.OneWayStreet.Server\Blazr.OneWayStreet.Server.csproj", "{3BA5C79F-8A80-476B-BD23-6462B8641AD9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.App.Infrastructure.Server", "Source\Libraries\Blazr.App.Infrastructure.Server\Blazr.App.Infrastructure.Server.csproj", "{00834510-708B-49FE-A7E7-101BC11085A0}"
 EndProject
@@ -39,6 +39,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.UI.Common", "Source\Libraries\Blazr.UI.Common\Blazr.UI.Common.csproj", "{C2E51B9D-D42D-456E-BCE8-54FC0D8013A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.Flux", "Source\Libraries\Blazr.Flux\Blazr.Flux.csproj", "{A7ABC4D4-0378-4897-8621-6CF799207DEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazr.ModalDialog", "Source\Libraries\Blazr.ModalDialog\Blazr.ModalDialog.csproj", "{41734F27-137C-4AB9-9B41-F22E2534ACFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazr.App.Presentation", "Blazr.App.Presentation\Blazr.App.Presentation.csproj", "{F41B23B1-6814-4C38-B903-212436B76538}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +94,14 @@ Global
 		{A7ABC4D4-0378-4897-8621-6CF799207DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7ABC4D4-0378-4897-8621-6CF799207DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7ABC4D4-0378-4897-8621-6CF799207DEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41734F27-137C-4AB9-9B41-F22E2534ACFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41734F27-137C-4AB9-9B41-F22E2534ACFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41734F27-137C-4AB9-9B41-F22E2534ACFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41734F27-137C-4AB9-9B41-F22E2534ACFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F41B23B1-6814-4C38-B903-212436B76538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F41B23B1-6814-4C38-B903-212436B76538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F41B23B1-6814-4C38-B903-212436B76538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F41B23B1-6814-4C38-B903-212436B76538}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +120,8 @@ Global
 		{1A69FF2D-81D6-4028-87D8-1FA98D5E975C} = {B0D258E8-B2DF-443B-954C-ED1974A11523}
 		{C2E51B9D-D42D-456E-BCE8-54FC0D8013A8} = {B0D258E8-B2DF-443B-954C-ED1974A11523}
 		{A7ABC4D4-0378-4897-8621-6CF799207DEC} = {B0D258E8-B2DF-443B-954C-ED1974A11523}
+		{41734F27-137C-4AB9-9B41-F22E2534ACFB} = {B0D258E8-B2DF-443B-954C-ED1974A11523}
+		{F41B23B1-6814-4C38-B903-212436B76538} = {B0D258E8-B2DF-443B-954C-ED1974A11523}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {913DAA5B-E6C5-46D7-9E6D-94E3638E4E96}

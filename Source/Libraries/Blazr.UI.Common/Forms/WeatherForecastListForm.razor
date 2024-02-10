@@ -1,12 +1,13 @@
 ﻿@namespace Blazr.UI.Common
-@inject IListRequestHandler DataBroker
+@inject WeatherForecastListPresenter Presenter
+
 <PageTitle>Weather Forecast List Form</PageTitle>
 
 <h1>Weather</h1>
 
 <p>This component demonstrates showing data.</p>
 
-@if (forecasts == null)
+@if (this.Presenter.WeatherForecasts == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -36,11 +37,8 @@ else
 }
 
 @code {
-    private IEnumerable<WeatherForecast>? forecasts;
-
     protected override async Task OnInitializedAsync()
     {
-        var result = await this.DataBroker.ExecuteAsync<WeatherForecast>(new ListQueryRequest());
-        forecasts = result.Items;
+        this.Presenter.LoadAsync();
     }
 }

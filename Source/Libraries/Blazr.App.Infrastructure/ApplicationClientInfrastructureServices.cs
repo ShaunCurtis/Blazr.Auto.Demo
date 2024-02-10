@@ -1,4 +1,6 @@
 ﻿
+using Blazr.OneWayStreet.Core.Requests;
+
 /// ============================================================
 /// Author: Shaun Curtis, Cold Elm Coders
 /// License: Use And Donate
@@ -15,6 +17,7 @@ public static class ApplicationClientInfrastructureServices
 
         // Add the standard handlers
         services.AddScoped<IListRequestHandler, ListRequestClientHandler>();
+        services.AddSingleton<IItemRequestConverter, ItemRequestConverter>();
         //services.AddScoped<IItemRequestHandler, ItemRequestServerHandler<InMemoryTestDbContext>>();
         //services.AddScoped<ICommandHandler, CommandServerHandler<InMemoryTestDbContext>>();
 
