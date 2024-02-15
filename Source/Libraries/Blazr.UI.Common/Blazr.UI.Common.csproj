@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Blazr.App.Presentation\Blazr.App.Presentation.csproj" />
     <ProjectReference Include="..\Blazr.App.Core\Blazr.App.Core.csproj" />
+    <ProjectReference Include="..\Blazr.ModalDialog\Blazr.ModalDialog.csproj" />
     <ProjectReference Include="..\Blazr.OneWayStreet\Blazr.OneWayStreet.csproj" />
   </ItemGroup>
 

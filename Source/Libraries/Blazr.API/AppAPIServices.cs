@@ -30,31 +30,31 @@ public static class InfrastructureServices
                 return result;
             });
 
-        app.MapPost(
-            $"/API/{recName}/ItemQuery",
-            async (
-                [FromBody] APIItemQueryRequest itemRequest,
-                IItemRequestHandler provider,
-                IItemRequestConverter itemRequestConverter,
-                CancellationToken cancelToken)
-            =>
-            {
-                var request = itemRequestConverter.Convert(itemRequest, cancelToken);
-                var result = await provider.ExecuteAsync<TRecord>(request);
-                return result;
-            });
+        //app.MapPost(
+        //    $"/API/{recName}/ItemQuery",
+        //    async (
+        //        [FromBody] APIItemQueryRequest itemRequest,
+        //        IItemRequestHandler provider,
+        //        IItemRequestConverter itemRequestConverter,
+        //        CancellationToken cancelToken)
+        //    =>
+        //    {
+        //        var request = itemRequestConverter.Convert(itemRequest, cancelToken);
+        //        var result = await provider.ExecuteAsync<TRecord>(request);
+        //        return result;
+        //    });
 
-        app.MapPost(
-            $"/API/{recName}/Command",
-            async (
-                [FromBody] APICommandRequest<TRecord> command,
-                ICommandHandler provider,
-                CancellationToken cancelToken)
-            =>
-            {
-                var request = CommandRequest<TRecord>.Create(command, cancelToken);
-                var result = await provider.ExecuteAsync<TRecord>(request);
-                return result;
-            });
+        //app.MapPost(
+        //    $"/API/{recName}/Command",
+        //    async (
+        //        [FromBody] APICommandRequest<TRecord> command,
+        //        ICommandHandler provider,
+        //        CancellationToken cancelToken)
+        //    =>
+        //    {
+        //        var request = CommandRequest<TRecord>.Create(command, cancelToken);
+        //        var result = await provider.ExecuteAsync<TRecord>(request);
+        //        return result;
+        //    });
     }
 }

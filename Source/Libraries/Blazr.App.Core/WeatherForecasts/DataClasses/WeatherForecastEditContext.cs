@@ -10,6 +10,8 @@ public class WeatherForecastEditContext
 {
     public string Name => "WeatherForecast Edit Context";
 
+    private WeatherForecast _baseRecord;
+    
     public Guid WeatherForecastUID { get; private set; }
 
     public string? Summary { get; set; }
@@ -18,8 +20,13 @@ public class WeatherForecastEditContext
 
     public DateOnly? Date { get; set; }
 
+    public bool IsNew { get; private set; }
+
+    public bool IsMutated => _baseRecord != this.AsRecord;
+
     public WeatherForecastEditContext(WeatherForecast record)
     {
+        _baseRecord = record;
         this.WeatherForecastUID = record.WeatherForecastUID;
         this.Summary = record.Summary;
         this.TemperatureC = record.TemperatureC;
@@ -33,4 +40,24 @@ public class WeatherForecastEditContext
         Date = this.Date ?? DateOnly.FromDateTime(DateTime.Now),
         TemperatureC = this.TemperatureC ?? 0
     };
+
+    public static WeatherForecastEditContext AsNew()
+    {
+        return new(new()
+        {
+            WeatherForecastUID = Guid.NewGuid()
+        })
+        { IsNew = true }; 
+    }
+
+    public CommandState GetCommandState()
+    {
+        if (this.IsNew)
+            return CommandState.Add;
+
+        if (this.IsMutated)
+            return CommandState.Update;
+
+        return CommandState.None;
+    }
 }

@@ -23,7 +23,7 @@ public class WeatherForecastListPresenter
         _forecasts = result.Items;
     }
 
-    private async ValueTask<ItemsProviderResult<WeatherForecast>> GetWeatherForecastsAsync(ItemsProviderRequest request)
+    public async ValueTask<ItemsProviderResult<WeatherForecast>> GetWeatherForecastsAsync(ItemsProviderRequest request)
     {
         var listRequest = new ListQueryRequest() { StartIndex = request.StartIndex, PageSize = request.Count };
         var result = await _listRequestHandler.ExecuteAsync<WeatherForecast>(listRequest);

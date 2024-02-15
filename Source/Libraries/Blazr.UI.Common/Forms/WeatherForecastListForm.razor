@@ -23,22 +23,38 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var forecast in this.Presenter.WeatherForecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
                     <td>@forecast.TemperatureC</td>
                     <td>@forecast.TemperatureC.TemperatureAsDegF()</td>
                     <td>@forecast.Summary</td>
+                    <td><button class="btn btn-primary" @onclick="() => this.OnEditAsync(forecast.WeatherForecastUID)" >Edit</button></td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
+<BsModalDialog @ref="_modalDialog" />
+
 @code {
+    private BsModalDialog? _modalDialog;
+
+    private IModalDialogContext? _dialogContext => _modalDialog?.Context ?? null;
+
     protected override async Task OnInitializedAsync()
     {
-        this.Presenter.LoadAsync();
+        await this.Presenter.LoadAsync();
+    }
+
+    private async Task OnEditAsync(Guid uid)
+    {
+        var options = new ModalOptions();
+        options.ControlParameters.Add("Uid", uid);
+
+        if (_modalDialog is not null)
+        await _modalDialog.Context.ShowAsync<WeatherForecastEditForm>(options);
     }
 }

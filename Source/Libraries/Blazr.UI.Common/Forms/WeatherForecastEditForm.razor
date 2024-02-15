@@ -1,5 +1,66 @@
-﻿<h3>WeatherForecastEditForm</h3>
+﻿@namespace Blazr.UI.Common
+@inject WeatherForecastEditPresenter Presenter
+
+<div class="p-2">
+    <div class="row">
+        <div class="col-12 mt-3 mb-3 border-bottom">
+            <h3> Weather Forecast Editor </h3>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+                <InputDate class="form-control" placeholder="Choose a date" @bind-Value="Presenter.RecordContext.Date" />
+                <label>Date</label>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+                <InputNumber class="form-control" placeholder="Enter a temperature" @bind-Value="Presenter.RecordContext.TemperatureC" />
+                <label>Temperature &deg;C</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+                <InputText class="form-control" placeholder="Enter a Summary" @bind-Value="Presenter.RecordContext.Summary" />
+                <label>Daily Summary</label>
+            </div>
+        </div>
+    </div>
+    <div class="row text-end">
+        <div class="col-12">
+            <button class="btn btn-success" @onclick="this.OnExit">Exit</button>
+            <button hidden="@this.Presenter.RecordContext.IsMutated" class="btn btn-dark" @onclick="this.OnExit">Exit</button>
+            <button hidden="@this.Presenter.RecordContext.IsMutated" class="btn btn-dark" @onclick="this.OnExit">Exit</button>
+        </div>
+    </div>
+</div>
 
 @code {
+    [CascadingParameter] private IModalDialogContext? ModalDialog { get; set; }
+    [Parameter] public Guid Uid { get; set; }
 
+    protected async override Task OnInitializedAsync()
+    {
+        ArgumentNullException.ThrowIfNull(this.ModalDialog);
+        await this.Presenter.LoadAsync(Uid);
+    }
+
+    private async Task OnSaveAsync()
+    {
+        await Presenter.SaveAsync();
+
+        if (this.Presenter.LastResult?.Successful ?? false)
+            this.ModalDialog?.Close(ModalResult.OK());
+    }
+
+
+    private void OnExit()
+    {
+        this.ModalDialog?.Close(ModalResult.Exit());
+    }
 }

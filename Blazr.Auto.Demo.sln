@@ -40,9 +40,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.UI.Common", "Source\L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.Flux", "Source\Libraries\Blazr.Flux\Blazr.Flux.csproj", "{A7ABC4D4-0378-4897-8621-6CF799207DEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazr.ModalDialog", "Source\Libraries\Blazr.ModalDialog\Blazr.ModalDialog.csproj", "{41734F27-137C-4AB9-9B41-F22E2534ACFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.ModalDialog", "Source\Libraries\Blazr.ModalDialog\Blazr.ModalDialog.csproj", "{41734F27-137C-4AB9-9B41-F22E2534ACFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazr.App.Presentation", "Blazr.App.Presentation\Blazr.App.Presentation.csproj", "{F41B23B1-6814-4C38-B903-212436B76538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazr.App.Presentation", "Blazr.App.Presentation\Blazr.App.Presentation.csproj", "{F41B23B1-6814-4C38-B903-212436B76538}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

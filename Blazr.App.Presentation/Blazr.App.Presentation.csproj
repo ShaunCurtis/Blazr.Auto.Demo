@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Source\Libraries\Blazr.App.Core\Blazr.App.Core.csproj" />
+    <ProjectReference Include="..\Source\Libraries\Blazr.Flux\Blazr.Flux.csproj" />
   </ItemGroup>
 
 </Project>

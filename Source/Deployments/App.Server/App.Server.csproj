@@ -12,9 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Blazr.App.Presentation\Blazr.App.Presentation.csproj" />
     <ProjectReference Include="..\..\Libraries\Blazr.API\Blazr.API.csproj" />
     <ProjectReference Include="..\..\Libraries\Blazr.App.Infrastructure.Server\Blazr.App.Infrastructure.Server.csproj" />
     <ProjectReference Include="..\..\Libraries\Blazr.App.Infrastructure\Blazr.App.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Libraries\Blazr.ModalDialog\Blazr.ModalDialog.csproj" />
     <ProjectReference Include="..\..\Libraries\Blazr.OneWayStreet.Server\Blazr.OneWayStreet.Server.csproj" />
     <ProjectReference Include="..\..\Libraries\Blazr.OneWayStreet\Blazr.OneWayStreet.csproj" />
     <ProjectReference Include="..\App.Client\App.Client.csproj" />
