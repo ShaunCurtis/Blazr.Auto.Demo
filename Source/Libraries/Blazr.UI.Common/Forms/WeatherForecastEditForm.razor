@@ -1,23 +1,24 @@
 ﻿@namespace Blazr.UI.Common
 @inject WeatherForecastEditPresenter Presenter
+@inject IToastService toastService
 
-<div class="p-2">
+<div class="p-4">
     <div class="row">
         <div class="col-12 mt-3 mb-3 border-bottom">
-            <h3> Weather Forecast Editor </h3>
+            <h2> Weather Forecast Editor </h2>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-12 col-md-6">
             <div class="form-floating mb-3">
-                <InputDate class="form-control" placeholder="Choose a date" @bind-Value="Presenter.RecordContext.Date" />
+                <InputDate class="form-control" placeholder="Choose a date" @bind-Value="Presenter.MutationContext.Date" />
                 <label>Date</label>
             </div>
         </div>
         <div class="col-12 col-md-6">
             <div class="form-floating mb-3">
-                <InputNumber class="form-control" placeholder="Enter a temperature" @bind-Value="Presenter.RecordContext.TemperatureC" />
+                <InputNumber class="form-control" placeholder="Enter a temperature" @bind-Value="Presenter.MutationContext.TemperatureC" />
                 <label>Temperature &deg;C</label>
             </div>
         </div>
@@ -26,19 +27,22 @@
     <div class="row">
         <div class="col-12 col-md-6">
             <div class="form-floating mb-3">
-                <InputText class="form-control" placeholder="Enter a Summary" @bind-Value="Presenter.RecordContext.Summary" />
+                <InputText class="form-control" placeholder="Enter a Summary" @bind-Value="Presenter.MutationContext.Summary" />
                 <label>Daily Summary</label>
             </div>
         </div>
     </div>
     <div class="row text-end">
         <div class="col-12">
-            <button class="btn btn-success" @onclick="this.OnExit">Exit</button>
-            <button hidden="@this.Presenter.RecordContext.IsMutated" class="btn btn-dark" @onclick="this.OnExit">Exit</button>
-            <button hidden="@this.Presenter.RecordContext.IsMutated" class="btn btn-dark" @onclick="this.OnExit">Exit</button>
+            <button hidden="@this.Presenter.MutationContext.IsClean" class="btn btn-outline-warning" @onclick="this.OnReset">Reset</button>
+            <button hidden="@this.Presenter.MutationContext.IsClean" class="btn btn-success" @onclick="this.OnSaveAsync">Save</button>
+            <button hidden="@this.Presenter.MutationContext.IsClean" class="btn btn-danger" @onclick="this.OnExitWithoutSave">Exit Without Saving</button>
+            <button hidden="@this.Presenter.MutationContext.IsMutated" class="btn btn-dark" @onclick="this.OnExit">Exit</button>
         </div>
     </div>
 </div>
+
+<NavigationLock ConfirmExternalNavigation="this.Presenter.MutationContext.IsMutated" OnBeforeInternalNavigation="this.OnNavigation" />
 
 @code {
     [CascadingParameter] private IModalDialogContext? ModalDialog { get; set; }
@@ -54,13 +58,40 @@
     {
         await Presenter.SaveAsync();
 
-        if (this.Presenter.LastResult?.Successful ?? false)
+        if (this.Presenter.LastResult.Successful)
+        {
             this.ModalDialog?.Close(ModalResult.OK());
+            toastService.ShowSuccess("Weather Forecast Saved.");
+            return;
+        }
+
+        toastService.ShowError(this.Presenter.LastResult.Message ?? "Save Failed.");
     }
 
+    private Task OnReset()
+    {
+        this.Presenter.MutationContext.Reset();
+        return Task.CompletedTask;
+    }
 
-    private void OnExit()
+    private Task OnExitWithoutSave()
     {
         this.ModalDialog?.Close(ModalResult.Exit());
+        return Task.CompletedTask;
+    }
+
+    private Task OnExit()
+    {
+        this.ModalDialog?.Close(ModalResult.Exit());
+        return Task.CompletedTask;
+    }
+
+    private void OnNavigation(LocationChangingContext context)
+    {
+        if (this.Presenter.MutationContext.IsMutated)
+        {
+            context.PreventNavigation();
+            toastService.ShowError("There are unsaved changes on the page.  Save or exit without saving.");
+        }
     }
 }

@@ -23,14 +23,23 @@ public class WeatherForecastEditContext
     public bool IsNew { get; private set; }
 
     public bool IsMutated => _baseRecord != this.AsRecord;
+    public bool IsClean => _baseRecord == this.AsRecord;
 
     public WeatherForecastEditContext(WeatherForecast record)
     {
         _baseRecord = record;
-        this.WeatherForecastUID = record.WeatherForecastUID;
-        this.Summary = record.Summary;
-        this.TemperatureC = record.TemperatureC;
-        this.Date = record.Date;
+        this.LoadFromBase();
+    }
+
+    public void Reset()
+        => this.LoadFromBase();
+
+    private void LoadFromBase()
+    {
+        this.WeatherForecastUID = _baseRecord.WeatherForecastUID;
+        this.Summary = _baseRecord.Summary;
+        this.TemperatureC = _baseRecord.TemperatureC;
+        this.Date = _baseRecord.Date;
     }
 
     public WeatherForecast AsRecord => new()

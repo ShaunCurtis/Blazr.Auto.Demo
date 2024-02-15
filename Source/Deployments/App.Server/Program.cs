@@ -4,6 +4,7 @@ using App.UI;
 using Microsoft.EntityFrameworkCore;
 using Blazr.RenderState.Server;
 using Blazr.App.Presentation;
+using Blazored.Toast;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddRazorComponents()
 builder.Services.AddAppServerInfrastructureServices();
 builder.Services.AddAppPresentationServices();
 builder.AddBlazrRenderStateServerServices();
+
+builder.Services.AddBlazoredToast();
 
 var app = builder.Build();
 

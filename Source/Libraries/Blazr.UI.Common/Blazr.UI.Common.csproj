@@ -12,6 +12,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Blazored.Toast" Version="4.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Blazr.RenderState" Version="1.0.0" />

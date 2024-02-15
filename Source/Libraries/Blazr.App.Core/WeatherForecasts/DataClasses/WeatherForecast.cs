@@ -2,7 +2,7 @@
 
 namespace Blazr.App.Core;
 
-public record WeatherForecast
+public record WeatherForecast : ICommandEntity
 {
     [Key]public Guid WeatherForecastUID { get; init; }
     public DateOnly Date { get; init; }

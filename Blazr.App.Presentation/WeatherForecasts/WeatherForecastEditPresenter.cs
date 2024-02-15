@@ -10,9 +10,9 @@ public class WeatherForecastEditPresenter
     private ICommandHandler _commandHandler;
     private IItemRequestHandler _itemHandler;
 
-    public WeatherForecastEditContext RecordContext { get; private set; } = new(new());
+    public WeatherForecastEditContext MutationContext { get; private set; } = new(new());
     public EditContext? EditContext { get; private set; }
-    public IDataResult? LastResult { get; private set; }
+    public IDataResult LastResult { get; private set; } = CommandResult.Success();
 
     public WeatherForecastEditPresenter(ICommandHandler commandHandler, IItemRequestHandler itemRequest)
     {
@@ -38,31 +38,31 @@ public class WeatherForecastEditPresenter
             item = result.Item;
         }
 
-        this.RecordContext = item is not null ? new(item) : WeatherForecastEditContext.AsNew();
-        this.EditContext = new(this.RecordContext);
+        this.MutationContext = item is not null ? new(item) : WeatherForecastEditContext.AsNew();
+        this.EditContext = new(this.MutationContext);
     }
 
     public async Task SaveAsync()
     {
-        if (RecordContext is null)
+        if (MutationContext is null)
         {
             this.LastResult = CommandResult.Failure("No Record Context to Save.");
             return;
         }
 
-        var command = new CommandRequest<WeatherForecast>(RecordContext.AsRecord, RecordContext.GetCommandState());
+        var command = new CommandRequest<WeatherForecast>(MutationContext.AsRecord, MutationContext.GetCommandState());
         this.LastResult = await _commandHandler.ExecuteAsync(command);
     }
 
     public async Task DeleteAsync()
     {
-        if (RecordContext is null)
+        if (MutationContext is null)
         {
             this.LastResult = CommandResult.Failure("No Record Context to Delete.");
             return;
         }
 
-        var command = new CommandRequest<WeatherForecast>(RecordContext.AsRecord, CommandState.Delete);
+        var command = new CommandRequest<WeatherForecast>(MutationContext.AsRecord, CommandState.Delete);
         this.LastResult = await _commandHandler.ExecuteAsync(command);
     }
 }
