@@ -34,4 +34,15 @@ public class WeatherForecastListPresenter
         return new ItemsProviderResult<WeatherForecast>(Enumerable.Empty<WeatherForecast>(), 0);
     }
 
+    public async ValueTask<GridItemsProviderResult<WeatherForecast>> GetWeatherForecastsAsync(GridItemsProviderRequest<WeatherForecast> request)
+    {
+        var listRequest = new ListQueryRequest() { StartIndex = request.StartIndex, PageSize = request.Count ?? 10 };
+        var result = await _listRequestHandler.ExecuteAsync<WeatherForecast>(listRequest);
+
+        if (result.Successful)
+            return GridItemsProviderResult.From<WeatherForecast>(result.Items.ToList(), (int)result.TotalCount);
+
+        return GridItemsProviderResult.From<WeatherForecast>(new List<WeatherForecast>(), 0);
+    }
+
 }

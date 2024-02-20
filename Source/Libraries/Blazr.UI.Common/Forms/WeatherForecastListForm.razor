@@ -7,46 +7,45 @@
 
 <p>This component demonstrates showing data.</p>
 
-@if (this.Presenter.WeatherForecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in this.Presenter.WeatherForecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureC.TemperatureAsDegF()</td>
-                    <td>@forecast.Summary</td>
-                    <td><button class="btn btn-primary" @onclick="() => this.OnEditAsync(forecast.WeatherForecastUID)" >Edit</button></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<div class="grid" tabindex="-1">
+    <QuickGrid TGridItem="WeatherForecast" ItemsProvider="this.GetItemsAsync" Virtualize Class="table" >
+        <PropertyColumn Property="item => item.Date " />
+        <PropertyColumn Title="Temp &deg;C" Property="item => item.TemperatureC" />
+        <PropertyColumn Title="Temp &deg;F" Property="item => item.TemperatureC.TemperatureAsDegF() " />
+        <PropertyColumn Property="item => item.Summary" />
+    </QuickGrid>
+
+</div>
+
+<div class="" tabindex="-1">
+    <QuickGrid TGridItem="WeatherForecast" ItemsProvider="this.GetItemsAsync" Class="table" Pagination="_pagination">
+        <PropertyColumn Property="item => item.Date " />
+        <PropertyColumn Title="Temp &deg;C" Property="item => item.TemperatureC" />
+        <PropertyColumn Title="Temp &deg;F" Property="item => item.TemperatureC.TemperatureAsDegF() " />
+        <PropertyColumn Property="item => item.Summary" />
+    </QuickGrid>
+<Paginator State="_pagination" />
+</div>
 
 <BsModalDialog @ref="_modalDialog" />
 
 @code {
     private BsModalDialog? _modalDialog;
+    PaginationState _pagination = new PaginationState { ItemsPerPage = 10 };
 
     private IModalDialogContext? _dialogContext => _modalDialog?.Context ?? null;
+    private GridItemsProvider<WeatherForecast>? itemsProvider;
 
     protected override async Task OnInitializedAsync()
     {
-        await this.Presenter.LoadAsync();
+        await _pagination.SetCurrentPageIndexAsync(8);
+        //await this.Presenter.LoadAsync();
+
+    }
+
+    private ValueTask<GridItemsProviderResult<WeatherForecast>> GetItemsAsync(GridItemsProviderRequest<WeatherForecast> request)
+    {
+        return this.Presenter.GetWeatherForecastsAsync(request);
     }
 
     private async Task OnEditAsync(Guid uid)
